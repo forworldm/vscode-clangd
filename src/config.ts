@@ -40,6 +40,8 @@ function replacement(name: string): string|undefined {
   }
   if (name === 'workspaceRoot' || name === 'workspaceFolder' ||
       name === 'cwd') {
+    if (vscode.workspace.workspaceFolders?.[0])
+      return vscode.workspace.workspaceFolders[0].uri.fsPath;
     if (vscode.workspace.rootPath !== undefined)
       return vscode.workspace.rootPath;
     if (vscode.window.activeTextEditor !== undefined)
